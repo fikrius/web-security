@@ -1,0 +1,143 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentations",
+        "description": "\n *      SQL Injection Example : lesch.kacie@mail.org. The full query : SELECT * FROM users WHERE email = '' OR 1=1 --''",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/csrf/transfer": {
+            "post": {
+                "tags": [
+                    "Funds Transfer"
+                ],
+                "summary": "Transfer funds",
+                "description": "Endpoint for transferring funds by providing account number and amount",
+                "operationId": "d3a54a9df8489628fab164aa0a9193d5",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "account_number",
+                                    "amount"
+                                ],
+                                "properties": {
+                                    "account_number": {
+                                        "description": "The account number to transfer funds to",
+                                        "type": "number"
+                                    },
+                                    "amount": {
+                                        "description": "The amount to transfer",
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Funds transferred successfully"
+                    },
+                    "400": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/api/sqlInjection/userUnsecure/{email}": {
+            "get": {
+                "tags": [
+                    "SQL Injection"
+                ],
+                "summary": "Insecure endpoint vulnerable to SQL injection",
+                "operationId": "85bd54ebabfa46784b3422d1ac568697",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "The email of the user to fetch.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a user record if found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/api/sqlInjection/userSecure/{email}": {
+            "get": {
+                "tags": [
+                    "SQL Injection"
+                ],
+                "summary": "Secure endpoint using parameterized queries",
+                "operationId": "5444c4c4aca237046385932facc72111",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "The email of the user to fetch.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a user record if found.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Funds Transfer",
+            "description": "Funds Transfer"
+        },
+        {
+            "name": "SQL Injection",
+            "description": "SQL Injection"
+        }
+    ]
+}
