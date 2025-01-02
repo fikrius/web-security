@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comments - XSS Attack</title>
+    <title>Stored XSS Attack</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -11,7 +11,14 @@
 
     <div class="container">
 
-        <a href="{{ url('/') }}">Back to home</a>
+        <div class="row justify-content-center mt-3 mb-3">
+            <div class="col-auto menu-item">
+                <a class="btn btn-primary" href="{{ url('/') }}">Back to home</a>
+            </div>
+            <div class="col-auto menu-item">
+                <a class="btn btn-primary" href="{{ url('/reflected-xss') }}">Reflected XSS</a>
+            </div>
+        </div>
 
         <!-- Post Section -->
         <div class="card mx-auto mb-4" style="max-width: 600px;">
@@ -57,8 +64,7 @@
 
         <!-- Comments Section -->
         <div id="commentsSection" class="mx-auto" style="max-width: 600px;">
-            {{-- <h5 class="mb-3">Comments <span id="comment-count">{{ $count }}</span></h5> --}}
-            <h5 class="mb-3">Comments <span id="comment-count"><?= $count ?></span></h5>
+            <h5 class="mb-3">Comments <span id="comment-count">{{ $count }}</span></h5>
             
             <!-- Dynamic comments will be appended here -->
             @foreach ($comments as $comment)

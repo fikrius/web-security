@@ -49,13 +49,13 @@
                 }
             }
         },
-        "/api/sqlInjection/userUnsecure/{email}": {
+        "/sqlInjection/userUnsecured/{email}": {
             "get": {
                 "tags": [
                     "SQL Injection"
                 ],
                 "summary": "Insecure endpoint vulnerable to SQL injection",
-                "operationId": "85bd54ebabfa46784b3422d1ac568697",
+                "operationId": "d9adfa598ca0b1fe14b095a46c59dabb",
                 "parameters": [
                     {
                         "name": "email",
@@ -89,13 +89,13 @@
                 }
             }
         },
-        "/api/sqlInjection/userSecure/{email}": {
+        "/sqlInjection/userSecured/{email}": {
             "get": {
                 "tags": [
                     "SQL Injection"
                 ],
                 "summary": "Secure endpoint using parameterized queries",
-                "operationId": "5444c4c4aca237046385932facc72111",
+                "operationId": "e7d1a4d891e83c5506726f9fb5ac6066",
                 "parameters": [
                     {
                         "name": "email",

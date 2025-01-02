@@ -44,7 +44,7 @@
 </head>
 <body>
     <div class="button-container">
-        <a href="{{ route('security.xss') }}" class="button">XSS (Cross-Site Scripting)</a>
+        <a href="{{ url('/stored-xss') }}" class="button">XSS (Cross-Site Scripting)</a>
         <a href="{{ route('security.csrf') }}" class="button">CSRF (Cross-Site Request Forgery)</a>
         <a href="{{ url('/api/documentation') }}" class="button">SQL Injection</a>
     </div>

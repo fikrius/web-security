@@ -50,4 +50,7 @@ class User extends Authenticatable
         return "active";
     }
 
+    public static function getUsername() {
+        return "bambang";
+    }
 }

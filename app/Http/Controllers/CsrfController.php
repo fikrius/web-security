@@ -12,26 +12,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CsrfController extends Controller
 {
-    
-    public function toggleEnableCsrfToken(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string',
-            'value' => 'required|boolean',
-        ]);
-
-        $variable = EnvironmentVariable::where('name', $request->name)->first();
-
-        if ($variable) {
-            $variable->value = $request->value;
-            $variable->save();
-
-            return response()->json(['success' => true, 'value' => $variable->value]);
-        }
-
-        return response()->json(['success' => false, 'message' => 'Variable not found']);
-    }
-    
     /**
      * @OA\Post(
      *     path="/csrf/transfer",
@@ -71,14 +51,7 @@ class CsrfController extends Controller
      */
     public function transfer(Request $request)
     {   
-        if ($request->source == 'form') {
-            return redirect()->back()->with('success', 'Transfer successfully!');
-        } else {
-            return response()->json([
-                'success' => true,
-                'message' => 'Form submitted successfully',
-                'data' => $request->all(),
-            ]);
-        }
+        return redirect()->back()->with('success', 'Transfer successfully!');
     }
+
 }

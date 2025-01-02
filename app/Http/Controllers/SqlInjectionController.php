@@ -17,7 +17,7 @@ class SqlInjectionController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/sqlInjection/userUnsecure/{email}",
+     *     path="/sqlInjection/userUnsecured/{email}",
      *     tags={"SQL Injection"},
      *     summary="Insecure endpoint vulnerable to SQL injection",
      *     @OA\Parameter(
@@ -38,7 +38,7 @@ class SqlInjectionController extends Controller
      *     )
      * )
      */
-    public function userUnsecure(Request $request)
+    public function userUnsecured(Request $request)
     {
         $email = $request->input('email');
 
@@ -49,7 +49,7 @@ class SqlInjectionController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/api/sqlInjection/userSecure/{email}",
+     *     path="/sqlInjection/userSecured/{email}",
      *     tags={"SQL Injection"},
      *     summary="Secure endpoint using parameterized queries",
      *     @OA\Parameter(
@@ -70,11 +70,20 @@ class SqlInjectionController extends Controller
      *     )
      * )
      */
-    public function userSecure(Request $request)
+    public function userSecured(Request $request)
     {
         $email = $request->input('email');
 
         $results = DB::select('SELECT * FROM users WHERE email = :email', ['email' => $email]);
+
+        return response()->json($results);
+    }
+
+    public function userUnsecuredSqlMapTest(Request $request)
+    {
+        $email = $request->query('email');
+
+        $results = DB::select("SELECT * FROM users WHERE email = '$email'");
 
         return response()->json($results);
     }

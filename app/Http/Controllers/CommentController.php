@@ -76,6 +76,8 @@ class CommentController extends Controller
 
     public function toggleSanitizeXss(Request $request)
     {
+        $input = $request->get('raw_input');
+        
         $request->validate([
             'name' => 'required|string',
             'value' => 'required|boolean',
